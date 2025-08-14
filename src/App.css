@@ -1,0 +1,772 @@
+/* ========================================
+   AUTUMN HARVEST THEME
+   ======================================== */
+
+:root {
+  /* Primary Theme Colors */
+  --autumn-cream: #ede0d4;        /* Lightest - cream/off-white */
+  --autumn-beige: #e6ccb2;        /* Light beige */
+  --autumn-tan: #ddb892;          /* Medium tan */
+  --autumn-brown: #b08968;        /* Medium brown */
+  --autumn-dark-brown: #7f5539;   /* Dark brown */
+  --autumn-accent: #9c6644;       /* Accent brown */
+
+  /* Semantic Color Assignments */
+  --background-primary: var(--autumn-cream);
+  --background-secondary: var(--autumn-beige);
+  --background-accent: var(--autumn-tan);
+  
+  --text-primary: var(--autumn-dark-brown);
+  --text-secondary: var(--autumn-brown);
+  --text-accent: var(--autumn-accent);
+  
+  --border-color: var(--autumn-tan);
+  --border-light: var(--autumn-beige);
+  --border-dark: var(--autumn-brown);
+  
+  --button-primary: var(--autumn-brown);
+  --button-primary-hover: var(--autumn-dark-brown);
+  --button-secondary: var(--autumn-accent);
+  --button-secondary-hover: var(--autumn-dark-brown);
+  
+  --card-background: var(--autumn-cream);
+  --card-border: var(--autumn-tan);
+  --card-shadow: rgba(127, 85, 57, 0.1); /* autumn-dark-brown with opacity */
+  
+  --link-color: var(--autumn-accent);
+  --link-hover: var(--autumn-dark-brown);
+  
+  --input-background: var(--autumn-cream);
+  --input-border: var(--autumn-tan);
+  --input-focus: var(--autumn-brown);
+  
+  /* Gradient Variations */
+  --gradient-warm: linear-gradient(135deg, var(--autumn-cream), var(--autumn-beige));
+  --gradient-earth: linear-gradient(135deg, var(--autumn-tan), var(--autumn-brown));
+  --gradient-deep: linear-gradient(135deg, var(--autumn-brown), var(--autumn-dark-brown));
+  --gradient-accent: linear-gradient(135deg, var(--autumn-beige), var(--autumn-accent));
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: var(--background-primary);
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.bg-primary { background-color: var(--background-primary); }
+.bg-secondary { background-color: var(--background-secondary); }
+.bg-accent { background-color: var(--background-accent); }
+
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-accent { color: var(--text-accent); }
+
+.border-default { border-color: var(--border-color); }
+.border-light { border-color: var(--border-light); }
+.border-dark { border-color: var(--border-dark); }
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--button-primary);
+  color: var(--autumn-cream);
+  border: 1px solid var(--button-primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--button-primary-hover);
+  border-color: var(--button-primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--button-secondary);
+  border: 2px solid var(--button-secondary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: var(--button-secondary);
+  color: var(--autumn-cream);
+  transform: translateY(-1px);
+}
+
+/* Card Styles */
+.card {
+  background-color: var(--card-background);
+  border: 1px solid var(--card-border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px var(--card-shadow);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px var(--card-shadow);
+}
+
+/* Input Styles */
+.input {
+  background-color: var(--input-background);
+  border: 1px solid var(--input-border);
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  color: var(--text-primary);
+  transition: border-color 0.3s ease;
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px rgba(176, 137, 104, 0.1);
+}
+
+/* Link Styles */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .card {
+    padding: 1rem;
+  }
+}
+
+/* ========================================
+   DARK MODE SUPPORT (Optional)
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-primary: var(--autumn-dark-brown);
+    --background-secondary: var(--autumn-brown);
+    --text-primary: var(--autumn-cream);
+    --text-secondary: var(--autumn-beige);
+    --card-background: var(--autumn-brown);
+    --input-background: var(--autumn-brown);
+  }
+}
+
+/* ========================================
+   MODERN ANIMATIONS & EFFECTS
+   ======================================== */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px var(--autumn-accent); }
+  50% { box-shadow: 0 0 20px var(--autumn-accent), 0 0 30px var(--autumn-accent); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Enhanced Button Styles for Modern Look */
+.btn-primary {
+  background: var(--gradient-earth);
+  color: var(--autumn-cream);
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(127, 85, 57, 0.3);
+}
+
+.btn-secondary {
+  background-color: rgba(237, 224, 212, 0.1);
+  color: var(--button-secondary);
+  border: 2px solid var(--button-secondary);
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background-color: var(--button-secondary);
+  color: var(--autumn-cream);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(156, 102, 68, 0.3);
+}
+
+/* Modern Card Enhancements */
+.card {
+  background: rgba(237, 224, 212, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(221, 184, 146, 0.3);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(127, 85, 57, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gradient-accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(127, 85, 57, 0.15);
+  border-color: var(--autumn-accent);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Modern Input Enhancements */
+.input {
+  background: rgba(237, 224, 212, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(221, 184, 146, 0.5);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  color: var(--text-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--autumn-accent);
+  box-shadow: 0 0 0 4px rgba(176, 137, 104, 0.1);
+  background: rgba(237, 224, 212, 1);
+}
+
+/* Modern Typography */
+.text-gradient-autumn {
+  background: var(--gradient-deep);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Ensure navbar text doesn't inherit gradient effects */
+.nav-button span,
+.nav-button-active span,
+nav a span,
+nav button span,
+[href="#projects"] span,
+[href="#contact"] span {
+  background: none !important;
+  background-color: transparent !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: currentColor !important;
+  background-clip: initial !important;
+  color: inherit !important;
+  -moz-background-clip: initial !important;
+  -ms-background-clip: initial !important;
+  text-fill-color: currentColor !important;
+}
+
+/* Force remove any background from specific button text */
+a[href="#projects"] span,
+a[href="#contact"] span,
+a[href="#home"] span,
+a[href="#about"] span {
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: inherit !important;
+  background-clip: initial !important;
+  color: inherit !important;
+}
+
+/* Extra specific targeting for About button */
+a[href="#about"] span,
+a[href="#about"]:hover span,
+a[href="#about"]:focus span,
+a[href="#about"]:active span {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: currentColor !important;
+  -moz-background-clip: initial !important;
+  -ms-background-clip: initial !important;
+  background-clip: initial !important;
+  color: inherit !important;
+  text-shadow: none !important;
+}
+
+/* Nuclear option - target About text specifically */
+nav a[href="#about"] span:before,
+nav a[href="#about"] span:after {
+  display: none !important;
+}
+
+nav a[href="#about"] span {
+  position: relative !important;
+  z-index: 999 !important;
+}
+
+/* ========================================
+   CENTER-OUTWARD UNDERLINE ANIMATION
+   ======================================== */
+
+.nav-text-with-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-underline {
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background-color: var(--autumn-dark-brown);
+  transform: translateX(-50%);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 1px;
+  opacity: 0.8;
+}
+
+/* Enhanced hover effects for underline */
+.nav-button:hover .nav-underline {
+  width: 100%;
+  opacity: 1;
+  background-color: var(--autumn-dark-brown);
+  box-shadow: 0 0 8px rgba(127, 85, 57, 0.3);
+}
+
+/* Active state underline */
+.nav-button-active .nav-underline {
+  width: 100%;
+  background-color: var(--autumn-cream);
+  opacity: 1;
+  animation: underlinePulse 2s ease-in-out infinite;
+}
+
+/* Smooth underline pulse for active state */
+@keyframes underlinePulse {
+  0%, 100% { 
+    opacity: 0.9;
+    transform: translateX(-50%) scaleY(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1.2);
+  }
+}
+
+/* Staggered underline animation delays */
+.nav-button:nth-child(1) .nav-underline { transition-delay: 0s; }
+.nav-button:nth-child(2) .nav-underline { transition-delay: 0.05s; }
+.nav-button:nth-child(3) .nav-underline { transition-delay: 0.1s; }
+.nav-button:nth-child(4) .nav-underline { transition-delay: 0.15s; }
+
+/* Responsive underline adjustments */
+@media (max-width: 768px) {
+  .nav-underline {
+    height: 1.5px;
+    bottom: -2px;
+  }
+}
+
+/* Loading States */
+.loading-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(237, 224, 212, 0.3) 0%, 
+    rgba(221, 184, 146, 0.5) 50%, 
+    rgba(237, 224, 212, 0.3) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ========================================
+   NAVBAR ENHANCEMENTS
+   ======================================== */
+
+/* Ultra-smooth navbar floating buttons */
+.nav-button {
+  background: rgba(237, 224, 212, 0.95);
+  backdrop-filter: blur(15px);
+  border: 2px solid var(--autumn-tan);
+  border-radius: 8px;
+  padding: 8px 30px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 15px rgba(127, 85, 57, 0.2);
+  position: relative;
+  overflow: hidden;
+  min-width: 100px;
+  text-align: center;
+  transform: translateY(0) scale(1);
+  filter: brightness(1);
+}
+
+.nav-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.1) 30%, 
+    rgba(255, 255, 255, 0.2) 50%, 
+    rgba(255, 255, 255, 0.1) 70%, 
+    transparent 100%
+  );
+  transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 1;
+}
+
+.nav-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: var(--autumn-beige);
+  border-color: var(--autumn-brown);
+  color: var(--autumn-dark-brown);
+  box-shadow: 
+    0 12px 28px rgba(127, 85, 57, 0.25), 
+    0 4px 12px rgba(127, 85, 57, 0.15),
+    0 0 0 1px rgba(176, 137, 104, 0.1);
+  filter: brightness(1.05);
+}
+
+.nav-button:hover::before {
+  left: 100%;
+}
+
+.nav-button:active {
+  transform: translateY(-1px) scale(1.01);
+  transition: all 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-button-active {
+  background: var(--autumn-brown);
+  border-color: var(--autumn-brown);
+  color: var(--autumn-cream);
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 
+    0 8px 25px rgba(127, 85, 57, 0.4),
+    0 2px 8px rgba(127, 85, 57, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-button-active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+/* Stagger animation for entrance */
+.nav-button:nth-child(1) { animation-delay: 0s; }
+.nav-button:nth-child(2) { animation-delay: 0.1s; }
+.nav-button:nth-child(3) { animation-delay: 0.2s; }
+.nav-button:nth-child(4) { animation-delay: 0.3s; }
+
+/* Enhanced floating entrance animation */
+@keyframes floatIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+    filter: blur(4px);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.nav-button-enter {
+  animation: floatIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Smooth pulse animation for active indicator */
+@keyframes smoothPulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: translateX(-50%) scale(1);
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
+.nav-button-active .active-indicator {
+  animation: smoothPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Ultra-smooth mobile floating button */
+.mobile-nav-button {
+  background: var(--autumn-brown);
+  backdrop-filter: blur(15px);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 
+    0 8px 32px rgba(127, 85, 57, 0.3),
+    0 2px 8px rgba(127, 85, 57, 0.2);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  transform: scale(1) rotate(0deg);
+  filter: brightness(1);
+}
+
+.mobile-nav-button:hover {
+  transform: scale(1.08) rotate(5deg);
+  box-shadow: 
+    0 12px 40px rgba(127, 85, 57, 0.4),
+    0 4px 16px rgba(127, 85, 57, 0.3);
+  filter: brightness(1.1);
+}
+
+.mobile-nav-button:active {
+  transform: scale(1.02) rotate(2deg);
+  transition: all 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Responsive enhancements */
+@media (min-width: 1024px) {
+  .nav-button:hover {
+    transform: translateY(-4px) scale(1.03);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-button {
+    padding: 10px 20px;
+    font-size: 12px;
+    min-width: 90px;
+  }
+}
+
+/* Navbar container spacing */
+.navbar-container {
+  padding: 32px 0;
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+.navbar-buttons-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 0 32px;
+}
+
+/* Responsive navbar spacing */
+@media (min-width: 1024px) {
+  .navbar-buttons-wrapper {
+    gap: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-buttons-wrapper {
+    gap: 16px;
+    padding: 0 16px;
+  }
+  
+  .floating-nav-button {
+    padding: 12px 20px;
+    min-width: 100px;
+    font-size: 12px;
+    margin: 0 8px;
+  }
+}
+
+/* Navbar scroll animations */
+.navbar-item-enter {
+  animation: slideInFromTop 0.3s ease-out forwards;
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile menu animations */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.mobile-menu-item {
+  animation: slideInFromRight 0.4s ease-out forwards;
+}
+
+/* Navbar glass morphism effect */
+.navbar-glass {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(237, 224, 212, 0.85);
+  border-bottom: 1px solid rgba(221, 184, 146, 0.3);
+  box-shadow: 0 4px 20px rgba(127, 85, 57, 0.1);
+}
