@@ -1,12 +1,15 @@
 import Hero from "@/components/Hero";
-import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import About from "@/components/About";
+import Experience from "@/components/Experience";
 
 export default function Home() {
   return (
-    <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
-      <div className="max-w-7xl w-full">
-        <Hero />
-      </div>
+    <main className="bg-black min-h-screen">
+      <Navbar />
+      <Hero />
+      <About />
+      <Experience />
     </main>
   );
 }
