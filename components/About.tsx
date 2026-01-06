@@ -16,9 +16,7 @@ const About = () => {
             About Me
           </h2>
           <p className="text-white/70 text-center text-lg leading-relaxed">
-            I'm a passionate Computer Science student based in Davao City, Philippines. 
-            I love building web applications and exploring new technologies. 
-            Currently focused on learning Next.js, React, and modern web development practices.
+            
           </p>
         </motion.div>
       </div>
