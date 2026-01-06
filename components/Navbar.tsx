@@ -21,7 +21,7 @@ const Navbar = () => {
       icon: <FolderOpen size={18} />,
     },
     {
-      name: "Tech Stack",
+      name: "Skills",
       link: "#tech",
       icon: <Code size={18} />,
     },

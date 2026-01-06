@@ -13,7 +13,7 @@ const About = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-10">
-            About Me
+            About
           </h2>
           <p className="text-white/70 text-center text-lg leading-relaxed">
             

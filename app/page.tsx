@@ -5,6 +5,7 @@ import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import TechStack from "@/components/TechStack";
 import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -12,10 +13,11 @@ export default function Home() {
       <Navbar />
       <Hero />
       <About />
-      <Experience />
       <Projects />
       <TechStack />
+      <Experience />
       <Contact />
+      <Footer />
     </main>
-  );
+  );  
 }

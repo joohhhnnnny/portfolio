@@ -4,21 +4,21 @@ import { motion } from "motion/react";
 
 const experiences = [
   {
-    title: "Frontend Developer Intern",
-    company: "Company Name",
-    duration: "2024 - Present",
-    description: "Working on building responsive web applications using React and Next.js.",
+    title: "Technicals Lead",
+    company: "University of Mindanao - ENIGMA",
+    duration: "Jul 2025 - Present",
+    description: "Leading the technical team in organizing tech events for students.",
   },
   {
-    title: "Freelance Web Developer",
-    company: "Self-employed",
-    duration: "2023 - 2024",
-    description: "Developed websites for small businesses and personal clients.",
+    title: "RealiTech Fullstack Developer",
+    company: "RealiTech Hackathon",
+    duration: "Jul - Aug 2024",
+    description: "Developed a real estate web application using React, Vite, Tailwind CSS, and Firebase.",
   },
   {
-    title: "Computer Science Student",
-    company: "University Name",
-    duration: "2022 - Present",
+    title: "Bachelor of Science in Computer Science",
+    company: "University of Mindanao",
+    duration: "Aug 2023 - Present",
     description: "Studying core CS fundamentals, algorithms, and software development.",
   },
 ];
