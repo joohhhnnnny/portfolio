@@ -11,23 +11,11 @@ import { HoverBorderGradient } from './ui/hover-border-gradient';
 
 const Hero = () => {
   return (
-    <div id="home" className="pb-20 pt-36">
-      <div>
+    <div id="home" className="pb-20 pt-36 overflow-hidden relative">
+      <div className="overflow-hidden absolute inset-0 pointer-events-none">
         <Spotlight className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen" fill="white"/>
         <Spotlight className="h-[80vh] w-[50vw] top-10 left-full" fill="purple"/>
         <Spotlight className="h-[80vh] w-[50vw] top-28 left-80" fill="blue"/>
-      </div>
-
-      <div className="flex h-screen w-full items-center justify-center bg-white dark:bg-black absolute top-0 left-0 ">
-        <div
-          className={cn(
-            "absolute inset-0",
-            "[background-size:40px_40px]",
-            "[background-image:linear-gradient(to_right,#e4e4e720_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e720_1px,transparent_1px)]",
-            "dark:[background-image:linear-gradient(to_right,#26262620_1px,transparent_1px),linear-gradient(to_bottom,#26262620_1px,transparent_1px)]",
-          )}
-        />
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
       </div>
 
       <div className="flex justify-center relative my-20 z-10">

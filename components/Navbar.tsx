@@ -7,27 +7,27 @@ const Navbar = () => {
   const navItems = [
     {
       name: "Home",
-      link: "#home",
+      link: "/#home",
       icon: <Home size={18} />,
     },
     {
       name: "About",
-      link: "#about",
+      link: "/about",
       icon: <User size={18} />,
     },
     {
       name: "Projects",
-      link: "#projects",
+      link: "/#projects",
       icon: <FolderOpen size={18} />,
     },
     {
       name: "Skills",
-      link: "#tech",
+      link: "/#tech",
       icon: <Code size={18} />,
     },
     {
       name: "Contact",
-      link: "#contact",
+      link: "/#contact",
       icon: <Mail size={18} />,
     },
   ];

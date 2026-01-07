@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 
 export const InfiniteTechCards = ({
   items,
@@ -12,58 +12,46 @@ export const InfiniteTechCards = ({
 }: {
   items: {
     name: string;
-    icon: string; // image path
+    icon: string;
   }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
   className?: string;
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLUListElement>(null);
-  const [start, setStart] = useState(false);
 
-  const getSpeedValue = () => {
-    if (speed === "fast") return 15;
-    if (speed === "normal") return 25;
-    return 40;
-  };
+  const getSpeed = useCallback(() => {
+    if (speed === "fast") return "20s";
+    if (speed === "normal") return "40s";
+    return "60s";
+  }, [speed]);
 
   useEffect(() => {
-    if (scrollerRef.current) {
-      // Only duplicate if not already done
-      if (scrollerRef.current.getAttribute("data-duplicated") === "true") {
-        setStart(true);
-        return;
-      }
-
-      const scrollerContent = Array.from(scrollerRef.current.children);
-      
-      // Duplicate items 3 times for seamless loop on wide screens
-      // This ensures enough content even for short item lists
-      for (let i = 0; i < 3; i++) {
-        scrollerContent.forEach((item) => {
-          const duplicatedItem = item.cloneNode(true);
-          if (scrollerRef.current) {
-            scrollerRef.current.appendChild(duplicatedItem);
-          }
-        });
-      }
-
-      scrollerRef.current.setAttribute("data-duplicated", "true");
-      setStart(true);
-    }
+    addAnimation();
   }, []);
 
-  // Calculate animation based on number of items
-  const animationStyle = start
-    ? {
-        animation: `scroll ${getSpeedValue()}s linear infinite`,
-        animationDirection: direction === "left" ? "normal" : "reverse",
-      }
-    : {};
+  function addAnimation() {
+    if (containerRef.current && scrollerRef.current) {
+      const scrollerContent = Array.from(scrollerRef.current.children);
+
+      scrollerContent.forEach((item) => {
+        const duplicatedItem = item.cloneNode(true);
+        if (scrollerRef.current) {
+          scrollerRef.current.appendChild(duplicatedItem);
+        }
+      });
+
+      containerRef.current.style.setProperty("--animation-direction", direction === "left" ? "forwards" : "reverse");
+      containerRef.current.style.setProperty("--animation-duration", getSpeed());
+      scrollerRef.current.classList.add("animate-scroll-tech");
+    }
+  }
 
   return (
     <div
+      ref={containerRef}
       className={cn(
         "scroller relative z-20 w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]",
         className
@@ -72,13 +60,9 @@ export const InfiniteTechCards = ({
       <ul
         ref={scrollerRef}
         className={cn(
-          "flex w-max min-w-full shrink-0 flex-nowrap py-4",
+          "flex w-max min-w-full shrink-0 flex-nowrap gap-6 py-4",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
-        style={{
-          gap: "24px",
-          ...animationStyle,
-        }}
       >
         {items.map((item, idx) => (
           <li

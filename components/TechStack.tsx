@@ -45,8 +45,8 @@ const toolsTech = [
 
 const TechStack = () => {
   return (
-    <section id="tech" className="py-20 relative z-10">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="tech" className="py-20 relative z-10 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 overflow-hidden">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -67,13 +67,14 @@ const TechStack = () => {
           Tech stuff that I've touched so far.. may or may not be used everyday.
         </motion.p>
 
-        <div className="space-y-8">
+        <div className="space-y-8 overflow-hidden">
           {/* Tech - scrolling left */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="overflow-hidden"
           >
             <h3 className="text-lg font-semibold text-purple-400 mb-4 text-center"></h3>
             <InfiniteTechCards
@@ -90,6 +91,7 @@ const TechStack = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
+            className="overflow-hidden"
           >
             <h3 className="text-lg font-semibold text-green-400 mb-4 text-center"></h3>
             <InfiniteTechCards
