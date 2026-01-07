@@ -23,41 +23,32 @@ const projects = [
 		githubUrl: "https://github.com/joohhhnnnny/project2",
 	},
 	{
-		title: "Project Three",
+		title: "Fluppy Bert",
 		description:
 			"An AI-powered chatbot application that uses natural language processing to provide intelligent responses and assistance.",
-		tags: ["Python", "OpenAI", "FastAPI", "React"],
-		image: "/images/project3.png",
+		tags: ["Dart", "Flutter",],
+		image: "/images/fluppybert.png",
 		liveUrl: "https://example.com",
 		githubUrl: "https://github.com/joohhhnnnny/project3",
 	},
 	{
-		title: "Project Three",
+		title: "Alien Care Autoshop",
 		description:
 			"An AI-powered chatbot application that uses natural language processing to provide intelligent responses and assistance.",
 		tags: ["Python", "OpenAI", "FastAPI", "React"],
-		image: "/images/project3.png",
+		image: "/images/aliencare.png",
 		liveUrl: "https://example.com",
 		githubUrl: "https://github.com/joohhhnnnny/project3",
 	},
 	{
-		title: "Project Three",
+		title: "Senior High School Management System",
 		description:
 			"An AI-powered chatbot application that uses natural language processing to provide intelligent responses and assistance.",
 		tags: ["Python", "OpenAI", "FastAPI", "React"],
-		image: "/images/project3.png",
+		image: "/images/iscp.png",
 		liveUrl: "https://example.com",
 		githubUrl: "https://github.com/joohhhnnnny/project3",
-	},
-	{
-		title: "Project Three",
-		description:
-			"An AI-powered chatbot application that uses natural language processing to provide intelligent responses and assistance.",
-		tags: ["Python", "OpenAI", "FastAPI", "React"],
-		image: "/images/project3.png",
-		liveUrl: "https://example.com",
-		githubUrl: "https://github.com/joohhhnnnny/project3",
-	},
+	}
 ];
 
 const Projects = () => {
