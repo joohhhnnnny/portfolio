@@ -36,12 +36,15 @@ export const InfiniteTechCards = ({
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
+      // Duplicate items multiple times for seamless loop
+      for (let i = 0; i < 3; i++) {
+        scrollerContent.forEach((item) => {
+          const duplicatedItem = item.cloneNode(true);
+          if (scrollerRef.current) {
+            scrollerRef.current.appendChild(duplicatedItem);
+          }
+        });
+      }
 
       containerRef.current.style.setProperty("--animation-direction", direction === "left" ? "forwards" : "reverse");
       containerRef.current.style.setProperty("--animation-duration", getSpeed());

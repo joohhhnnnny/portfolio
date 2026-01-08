@@ -24,7 +24,9 @@ interface ParticleNetworkProps {
 
 export const ParticleNetwork: React.FC<ParticleNetworkProps> = ({
   particleCount = 80,
-  particleColor = "rgba(139, 92, 246, 0.6)",
+  particleColor = 
+  "rgba(255, 255, 255, 1)",
+  // "rgba(139, 92, 246, 0.6)",
   lineColor = "rgba(139, 92, 246, 0.15)",
   particleRadius = 2,
   lineWidth = 1,

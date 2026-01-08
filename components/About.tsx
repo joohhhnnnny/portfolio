@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "motion/react";
-import { Code, Cpu, Lightbulb, Target, Award, Heart, ExternalLink, Briefcase } from "lucide-react";
+import { Code, Cpu, Lightbulb, Target, Award, GraduationCap, Heart, ExternalLink, Briefcase } from "lucide-react";
 
 const highlights = [
   {
@@ -36,14 +36,23 @@ const experiences = [
   {
     title: "RealiTech Fullstack Developer",
     company: "Filipino Homes Hackestate",
-    duration: "Jul - Aug 2024",
+    duration: "Jul - Aug 2025",
     description: "Developed a real estate web application using React, Vite, Tailwind CSS, and Firebase.",
   },
+];
+
+const education = [
   {
-    title: "Bachelor of Science in Computer Science",
-    company: "University of Mindanao",
+    degree: "Bachelor of Science in Computer Science",
+    institution: "University of Mindanao",
     duration: "Aug 2023 - Present",
     description: "Studying core CS fundamentals, algorithms, and software development.",
+  },
+  {
+    degree: "Science, Technology, Engineering, and Mathematics (STEM)",
+    institution: "Ford Academy of the Arts Inc.",
+    duration: "Jul 2021 - May 2023",
+    description: "Studied core STEM subjects including mathematics, physics, chemistry, and computer science.",
   },
 ];
 
@@ -201,8 +210,38 @@ const About = () => {
           ))}
         </motion.div>
 
-        {/* Experience, Certifications & Volunteering Section */}
+        {/* Education, Experience, Certifications & Volunteering Section */}
         <div className="mt-20 space-y-16">
+          {/* Education */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <GraduationCap size={24} className="text-purple-400" />
+              <h3 className="text-2xl font-bold text-white">Education</h3>
+            </div>
+            <div className="space-y-4">
+              {education.map((edu, idx) => (
+                <div
+                  key={idx}
+                  className="p-5 rounded-xl border border-white/[0.1] bg-gradient-to-b from-white/[0.05] to-transparent hover:border-purple-500/50 transition-all duration-300 group"
+                >
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                    <h4 className="text-white font-semibold group-hover:text-purple-400 transition-colors duration-300">
+                      {edu.degree}
+                    </h4>
+                    <span className="text-white/50 text-sm">{edu.duration}</span>
+                  </div>
+                  <p className="text-purple-400 text-sm mb-2">{edu.institution}</p>
+                  <p className="text-white/60 text-sm leading-relaxed">{edu.description}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* Experience */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

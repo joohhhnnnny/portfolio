@@ -25,8 +25,8 @@ const projects = [
 	{
 		title: "Fluppy Bert",
 		description:
-			"An AI-powered chatbot application that uses natural language processing to provide intelligent responses and assistance.",
-		tags: ["Dart", "Flutter",],
+			"A Flutter-based 2D physics game that lets players control a bird character as it navigates obstacles using real-world physics principles.",
+		tags: ["Physics Game", "Dart", "Flutter"],
 		image: "/images/fluppybert.png",
 		liveUrl: "https://example.com",
 		githubUrl: "https://github.com/joohhhnnnny/project3",
@@ -34,8 +34,8 @@ const projects = [
 	{
 		title: "Alien Care Autoshop",
 		description:
-			"An AI-powered chatbot application that uses natural language processing to provide intelligent responses and assistance.",
-		tags: ["Python", "OpenAI", "FastAPI", "React"],
+			"A Fullstack webapplication for managing an auto repair shop, featuring customer management, appointment scheduling, inventory tracking, and invoicing.",
+		tags: ["Typescript", "Laravel", "PostgreSQL"],
 		image: "/images/aliencare.png",
 		liveUrl: "https://example.com",
 		githubUrl: "https://github.com/joohhhnnnny/project3",
@@ -43,8 +43,8 @@ const projects = [
 	{
 		title: "Senior High School Management System",
 		description:
-			"An AI-powered chatbot application that uses natural language processing to provide intelligent responses and assistance.",
-		tags: ["Python", "OpenAI", "FastAPI", "React"],
+			"A web-based application designed to streamline the management of senior high school operations, including student records, class schedules, and grading.",
+		tags: ["Vanilla JS", "PHP", "MySQL"],
 		image: "/images/iscp.png",
 		liveUrl: "https://example.com",
 		githubUrl: "https://github.com/joohhhnnnny/project3",
@@ -155,10 +155,10 @@ const Projects = () => {
 							>
 								<div className="relative h-full flex flex-col border border-white/[0.1] rounded-xl overflow-hidden bg-gradient-to-b from-white/[0.05] to-transparent backdrop-blur-sm group hover:border-purple-500/50 hover:shadow-[0_20px_50px_-15px_rgba(168,85,247,0.35)] hover:-translate-y-4 transform-gpu transition-all duration-300 ease-out will-change-transform">
 								{/* Gradient overlay on hover */}
-								<div className="absolute inset-0 bg-gradient-to-t from-purple-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+							<div className="absolute inset-0 bg-gradient-to-t from-purple-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" />
 
-								{/* Project Image */}
-								<div className="h-48 bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center overflow-hidden relative">
+							{/* Project Image */}
+							<div className="h-48 bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center overflow-hidden relative rounded-t-xl">
 									<img
 										src={project.image}
 										alt={project.title}
