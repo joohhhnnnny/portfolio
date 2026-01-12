@@ -63,7 +63,7 @@ const TechStack = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: "circOut" }}
           viewport={{ once: true }}
-          className="text-white/70 text-center mb-10 max-w-2xl mx-auto"
+          className="text-white/70 text-center mb-10 max-w-2xl mx-auto text-lg"
         >
           Tech stuff that I've touched so far.. may or may not be used everyday.
         </motion.p>

@@ -70,7 +70,7 @@ const Projects = () => {
 			const cardWidth = carouselRef.current.scrollWidth / projects.length;
 			carouselRef.current.scrollTo({
 				left: cardWidth * index,
-				behavior: "smooth",
+				behavior: "auto",
 			});
 		}
 	};
@@ -147,10 +147,10 @@ const Projects = () => {
 						{projects.map((project, idx) => (
 							<motion.div
 								key={idx}
-								initial={{ opacity: 0, y: 20 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.5, delay: idx * 0.1, ease: "circOut" }}
-								viewport={{ once: true }}
+								initial={idx < 3 ? { opacity: 0, y: 20 } : false}
+								whileInView={idx < 3 ? { opacity: 1, y: 0 } : {}}
+								viewport={idx < 3 ? { once: true } : undefined}
+								transition={idx < 3 ? { duration: 0.5, delay: idx * 0.1, ease: "circOut" } : { duration: 0 }}
 								className="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-center"
 							>
 								<div className="relative h-full flex flex-col border border-white/[0.1] rounded-xl overflow-hidden bg-gradient-to-b from-white/[0.05] to-transparent backdrop-blur-sm group hover:border-purple-500/50 hover:shadow-[0_20px_50px_-15px_rgba(168,85,247,0.35)] hover:-translate-y-4 transform-gpu transition-all duration-300 ease-out will-change-transform">

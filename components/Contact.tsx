@@ -22,7 +22,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: "circOut" }}
           viewport={{ once: true }}
-          className="text-white/70 text-center mb-10 max-w-2xl mx-auto"
+          className="text-white/70 text-center mb-10 max-w-2xl mx-auto text-lg"
         >
           I'm currently looking for new opportunities. Whether you have a question or just want to say hi, feel free to reach out!
         </motion.p>
