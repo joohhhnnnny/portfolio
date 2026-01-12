@@ -35,7 +35,7 @@ const experiences = [
   },
   {
     title: "RealiTech Fullstack Developer",
-    company: "Filipino Homes Hackestate",
+    company: "PropTech Hackestate Hackathon",
     duration: "Jul - Aug 2025",
     description: "Developed a real estate web application using React, Vite, Tailwind CSS, and Firebase.",
   },
