@@ -52,48 +52,89 @@ const projects = [
 ];
 
 const Projects = () => {
-	const [currentIndex, setCurrentIndex] = useState(0);
-	const carouselRef = useRef<HTMLDivElement>(null);
+	const n = projects.length;
+	const [activeIndex, setActiveIndex] = useState(n);
+	const trackRef = useRef<HTMLDivElement>(null);
 	const [isMobile, setIsMobile] = useState(false);
+	const touchStartX = useRef(0);
+	const touchDeltaX = useRef(0);
+
+	// 3 copies for seamless infinite looping
+	const extendedProjects = [...projects, ...projects, ...projects];
+	const realIndex = ((activeIndex % n) + n) % n;
 
 	useEffect(() => {
-		const checkMobile = () => {
-			setIsMobile(window.innerWidth < 768);
-		};
+		const checkMobile = () => setIsMobile(window.innerWidth < 768);
 		checkMobile();
 		window.addEventListener("resize", checkMobile);
 		return () => window.removeEventListener("resize", checkMobile);
 	}, []);
 
-	const scrollToIndex = (index: number) => {
-		if (carouselRef.current) {
-			const cardWidth = carouselRef.current.scrollWidth / projects.length;
-			carouselRef.current.scrollTo({
-				left: cardWidth * index,
-				behavior: "auto",
-			});
+	const getCardOffset = (index: number) => {
+		const track = trackRef.current;
+		if (!track) return 0;
+		const card = track.children[index] as HTMLElement;
+		if (!card) return 0;
+		return card.offsetLeft;
+	};
+
+	const slideTo = (index: number, withTransition: boolean) => {
+		const track = trackRef.current;
+		if (!track) return;
+		track.style.transition = withTransition ? "transform 0.4s ease-out" : "none";
+		track.style.transform = `translateX(-${getCardOffset(index)}px)`;
+	};
+
+	// Set initial position without animation
+	useEffect(() => {
+		requestAnimationFrame(() => slideTo(n, false));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	// Reposition on resize without animation
+	useEffect(() => {
+		const handleResize = () => slideTo(activeIndex, false);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [activeIndex]);
+
+	const handleTransitionEnd = (e: React.TransitionEvent) => {
+		if (e.target !== trackRef.current) return;
+		if (activeIndex < n || activeIndex >= 2 * n) {
+			const normalized = n + (((activeIndex - n) % n + n) % n);
+			setActiveIndex(normalized);
+			slideTo(normalized, false);
 		}
 	};
 
 	const handlePrev = () => {
-		const newIndex = currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
-		setCurrentIndex(newIndex);
-		scrollToIndex(newIndex);
+		const newIndex = activeIndex - 1;
+		setActiveIndex(newIndex);
+		slideTo(newIndex, true);
 	};
 
 	const handleNext = () => {
-		const newIndex = currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
-		setCurrentIndex(newIndex);
-		scrollToIndex(newIndex);
+		const newIndex = activeIndex + 1;
+		setActiveIndex(newIndex);
+		slideTo(newIndex, true);
 	};
 
-	const handleScroll = () => {
-		if (carouselRef.current) {
-			const scrollLeft = carouselRef.current.scrollLeft;
-			const cardWidth = carouselRef.current.scrollWidth / projects.length;
-			const newIndex = Math.round(scrollLeft / cardWidth);
-			setCurrentIndex(newIndex);
+	const handleTouchStart = (e: React.TouchEvent) => {
+		touchStartX.current = e.touches[0].clientX;
+		touchDeltaX.current = 0;
+	};
+
+	const handleTouchMove = (e: React.TouchEvent) => {
+		touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+	};
+
+	const handleTouchEnd = () => {
+		if (Math.abs(touchDeltaX.current) > 50) {
+			if (touchDeltaX.current < 0) handleNext();
+			else handlePrev();
 		}
+		touchDeltaX.current = 0;
 	};
 
 	return (
@@ -132,27 +173,24 @@ const Projects = () => {
 						</button>
 					)}
 
-					{/* Carousel Container with overflow hidden */}
-					<div className="overflow-hidden">
-					{/* Carousel Container */}
+					{/* Carousel */}
 					<div
-						ref={carouselRef}
-						onScroll={handleScroll}
-						className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4"
-						style={{
-							scrollbarWidth: "none",
-							msOverflowStyle: "none",
-						}}
+						className="overflow-hidden"
+						onTouchStart={handleTouchStart}
+						onTouchMove={handleTouchMove}
+						onTouchEnd={handleTouchEnd}
 					>
-						{projects.map((project, idx) => (
-							<motion.div
-								key={idx}
-								initial={idx < 3 ? { opacity: 0, y: 20 } : false}
-								whileInView={idx < 3 ? { opacity: 1, y: 0 } : {}}
-								viewport={idx < 3 ? { once: true } : undefined}
-								transition={idx < 3 ? { duration: 0.5, delay: idx * 0.1, ease: "circOut" } : { duration: 0 }}
-								className="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-center"
-							>
+						<div
+							ref={trackRef}
+							onTransitionEnd={handleTransitionEnd}
+							className="flex gap-6"
+							style={{ willChange: "transform" }}
+						>
+							{extendedProjects.map((project, idx) => (
+								<div
+									key={idx}
+									className="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+								>
 								<div className="relative h-full flex flex-col border border-white/[0.1] rounded-xl overflow-hidden bg-gradient-to-b from-white/[0.05] to-transparent backdrop-blur-sm group hover:border-purple-500/50 hover:shadow-[0_20px_50px_-15px_rgba(168,85,247,0.35)] hover:-translate-y-4 transform-gpu transition-all duration-300 ease-out will-change-transform">
 								{/* Gradient overlay on hover */}
 							<div className="absolute inset-0 bg-gradient-to-t from-purple-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" />
@@ -234,29 +272,30 @@ const Projects = () => {
 								{/* Bottom accent line */}
 								<div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 							</div>
-						</motion.div>
-					))}
-				</div>
-				</div>
+								</div>
+							))}
+						</div>
+					</div>
 
-				{/* Pagination Dots */}
-				<div className="flex justify-center gap-2 mt-6">
-					{projects.map((_, idx) => (
-						<button
-							key={idx}
-							onClick={() => {
-								setCurrentIndex(idx);
-								scrollToIndex(idx);
-							}}
-							className={`w-2 h-2 rounded-full transition-all duration-300 ${
-								currentIndex === idx
-									? "bg-purple-500 w-6"
-									: "bg-white/30 hover:bg-white/50"
-							}`}
-							aria-label={`Go to project ${idx + 1}`}
-						/>
-					))}
-				</div>
+					{/* Pagination Dots */}
+					<div className="flex justify-center gap-2 mt-6">
+						{projects.map((_, idx) => (
+							<button
+								key={idx}
+								onClick={() => {
+									const target = n + idx;
+									setActiveIndex(target);
+									slideTo(target, true);
+								}}
+								className={`w-2 h-2 rounded-full transition-all duration-300 ${
+									realIndex === idx
+										? "bg-purple-500 w-6"
+										: "bg-white/30 hover:bg-white/50"
+								}`}
+								aria-label={`Go to project ${idx + 1}`}
+							/>
+						))}
+					</div>
 				</div>
 			</div>
 		</section>

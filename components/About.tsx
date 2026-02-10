@@ -58,6 +58,12 @@ const education = [
 
 const certifications = [
   {
+    title: "AI Fundamentals with IBM SkillsBuild",
+    issuer: "Cisco",
+    date: "Jan 2026",
+    credentialUrl: "https://www.credly.com/badges/5e6acef8-2840-4ac0-bda8-61dd2987d896/linked_in_profile",
+  },
+  {
     title: "Machine Learning with Python",
     issuer: "freeCodeCamp",
     date: "Nov 2025",
@@ -74,12 +80,6 @@ const certifications = [
     issuer: "Certiport - A Pearson VUE Business",
     date: "Mar 2025",
     credentialUrl: "https://www.credly.com/badges/a9f6a917-0234-4137-affd-006090020c35/linked_in_profile",
-  },
-  {
-    title: "Introduction to Critical Infrastructure Protection",
-    issuer: "OPSWAT",
-    date: "Feb 2025",
-    credentialUrl: "https://www.credly.com/badges/75f0982a-4821-49bb-b983-96a7feb5613f/linked_in_profile",
   },
   {
     title: "IT Specialist - Java",
@@ -183,32 +183,6 @@ const About = () => {
             ))}
           </motion.div>
         </div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.5 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
-        >
-          {[
-            { value: "20+", label: "Technologies" },
-            { value: "4+", label: "Projects" },
-            { value: "2+", label: "Years Learning" },
-            { value: "1", label: "Leadership Role" },
-          ].map((stat, idx) => (
-            <div
-              key={idx}
-              className="text-center p-6 rounded-xl border border-white/[0.1] bg-black/50"
-            >
-              <div className="text-3xl md:text-4xl font-bold text-purple-400 mb-2">
-                {stat.value}
-              </div>
-              <div className="text-white/60 text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </motion.div>
 
         {/* Education, Experience, Certifications & Volunteering Section */}
         <div className="mt-20 space-y-16">

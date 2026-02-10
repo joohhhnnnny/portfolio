@@ -16,58 +16,75 @@ export const BackgroundGradient = ({
   borderRadius?: string;
   animate?: boolean;
 }) => {
-  const variants = {
-    initial: {
-      backgroundPosition: "0 50%",
-    },
+  const spinVariants = {
     animate: {
-      backgroundPosition: ["0, 50%", "100% 50%", "0 50%"],
+      rotate: [0, 360],
     },
   };
+
   return (
-    <div className={cn("relative p-[4px] group", containerClassName)}>
+    <div className={cn("relative p-[3px] group", containerClassName)}>
+      {/* Outer glow - animated spinning purple */}
       <motion.div
-        variants={animate ? variants : undefined}
-        initial={animate ? "initial" : undefined}
+        variants={animate ? spinVariants : undefined}
         animate={animate ? "animate" : undefined}
         transition={
           animate
             ? {
-                duration: 5,
+                duration: 3,
                 repeat: Infinity,
-                repeatType: "reverse",
+                ease: "linear",
               }
             : undefined
         }
-        style={{
-          backgroundSize: animate ? "400% 400%" : undefined,
-        }}
         className={cn(
-          "absolute inset-0 z-[1] opacity-60 group-hover:opacity-100 blur-xl  transition duration-500 will-change-transform",
+          "absolute inset-[-4px] z-[1] opacity-70 group-hover:opacity-100 blur-xl transition duration-500 will-change-transform",
           borderRadius,
-          " bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)]"
+          "bg-[conic-gradient(from_0deg,#7c3aed,#a855f7,#c084fc,#e879f9,#a855f7,#7c3aed)]"
         )}
       />
+      {/* Inner border - animated spinning purple */}
       <motion.div
-        variants={animate ? variants : undefined}
-        initial={animate ? "initial" : undefined}
+        variants={animate ? spinVariants : undefined}
         animate={animate ? "animate" : undefined}
         transition={
           animate
             ? {
-                duration: 5,
+                duration: 3,
                 repeat: Infinity,
-                repeatType: "reverse",
+                ease: "linear",
               }
             : undefined
         }
-        style={{
-          backgroundSize: animate ? "400% 400%" : undefined,
-        }}
         className={cn(
           "absolute inset-0 z-[1] will-change-transform",
           borderRadius,
-          "bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)]"
+          "bg-[conic-gradient(from_0deg,#7c3aed,#a855f7,#c084fc,#e879f9,#a855f7,#7c3aed)]"
+        )}
+      />
+      {/* Pulsing purple glow */}
+      <motion.div
+        animate={
+          animate
+            ? {
+                opacity: [0.4, 0.8, 0.4],
+                scale: [1, 1.05, 1],
+              }
+            : undefined
+        }
+        transition={
+          animate
+            ? {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }
+            : undefined
+        }
+        className={cn(
+          "absolute inset-[-6px] z-[0] blur-2xl will-change-transform",
+          borderRadius,
+          "bg-purple-500/40"
         )}
       />
 
