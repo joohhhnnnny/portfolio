@@ -1,11 +1,10 @@
 "use client";
 import { Spotlight } from '@/components/ui/spotlight'
-import { cn } from '@/lib/utils'
-import { motion, scale } from "framer-motion";
+import { motion } from "motion/react";
 import React from 'react'
 import { TextGenerateEffect } from './ui/text-generate-effect'
 import { BackgroundGradient } from "@/components/ui/background-gradient";
-import { Briefcase, Github, GraduationCap, Linkedin, Mail, MapPin, School } from 'lucide-react';
+import { Github, GraduationCap, Linkedin, Mail, MapPin } from 'lucide-react';
 import { HoverBorderGradient } from './ui/hover-border-gradient';
 
 
@@ -100,9 +99,11 @@ const Hero = () => {
             </div>
 
             <p className="text-m text-center text-white/50 mt-4">
-            I'm a passionate Computer Science student based in Davao City, Philippines. 
-            I love building web applications and exploring new technologies. 
-            Currently focused on learning Next.js, React, and modern web development practices.
+            I'm a passionate Computer Science student based in Davao City, Philippines.
+            I love building web applications and exploring new technologies.
+            Currently focused on developing Computer Vision and Machine Learning projects, 
+            applying intelligent systems to solve real-world problems and continuously expanding 
+            my knowledge in AI-driven technologies.
             </p>
           </motion.div>
 

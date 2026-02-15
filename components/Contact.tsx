@@ -1,9 +1,49 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "motion/react";
 import { Mail, Linkedin, Github, MapPin, Send } from "lucide-react";
 
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ type: "idle" | "success" | "error"; text?: string }>({
+    type: "idle",
+  });
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (submitting) return;
+
+    setSubmitting(true);
+    setStatus({ type: "idle" });
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message, website: "" }),
+      });
+
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+
+      if (!res.ok || !data.ok) {
+        setStatus({ type: "error", text: data.error || "Failed to send message." });
+        return;
+      }
+
+      setStatus({ type: "success", text: "Message sent successfully." });
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      setStatus({ type: "error", text: "Failed to send message." });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 relative z-10">
       <div className="max-w-4xl mx-auto px-6">
@@ -102,12 +142,25 @@ const Contact = () => {
           >
             <h3 className="text-xl font-semibold text-white mb-4">Send a Message</h3>
             
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={onSubmit}>
+              {/* Honeypot field (hidden) */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                value=""
+                onChange={() => {}}
+              />
               <div>
                 <label className="text-sm text-white/70 mb-1 block">Name</label>
                 <input
                   type="text"
                   placeholder="Your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
@@ -117,6 +170,9 @@ const Contact = () => {
                 <input
                   type="email"
                   placeholder="your.email@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
@@ -126,17 +182,33 @@ const Contact = () => {
                 <textarea
                   rows={4}
                   placeholder="Your message..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-purple-500 transition-colors resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
+                disabled={submitting}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:opacity-60 disabled:hover:bg-purple-600 text-white font-medium rounded-lg transition-colors"
               >
                 <Send size={18} />
-                <span>Send Message</span>
+                <span>{submitting ? "Sending..." : "Send Message"}</span>
               </button>
+
+              {status.type !== "idle" && (
+                <p
+                  className={
+                    status.type === "success"
+                      ? "text-sm text-white/70"
+                      : "text-sm text-white/70"
+                  }
+                >
+                  {status.text}
+                </p>
+              )}
             </form>
           </motion.div>
         </div>

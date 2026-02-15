@@ -1,55 +1,10 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "motion/react";
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
-
-const projects = [
-	{
-		title: "RealiTech",
-		description:
-			"A real estate web application project featuring property listings, AI buyer guidance, fraud detection, and chatbot integration.",
-		tags: ["React", "Vite", "Tailwind CSS", "Firebase"],
-		image: "/images/realitech.png",
-		liveUrl: "https://um-realitech-hackestate-1ed69.web.app/",
-		githubUrl: "https://github.com/joohhhnnnny/um-realitech-frontend-realestate",
-	},
-	{
-		title: "Human Face Detector",
-		description:
-			"A python computer vision project that aims to detect and highlight human faces in real-time using MobileNetv2 and YOLOv8s models.",
-		tags: ["Python", "YOLOv8s", "MobileNetv2"],
-		image: "/images/face.jpg",
-		liveUrl: "https://example.com",
-		githubUrl: "https://github.com/joohhhnnnny/project2",
-	},
-	{
-		title: "Fluppy Bert",
-		description:
-			"A Flutter-based 2D physics game that lets players control a bird character as it navigates obstacles using real-world physics principles.",
-		tags: ["Physics Game", "Dart", "Flutter"],
-		image: "/images/fluppybert.png",
-		liveUrl: "https://example.com",
-		githubUrl: "https://github.com/joohhhnnnny/project3",
-	},
-	{
-		title: "Alien Care Autoshop",
-		description:
-			"A Fullstack webapplication for managing an auto repair shop, featuring customer management, appointment scheduling, inventory tracking, and invoicing.",
-		tags: ["Typescript", "Laravel", "PostgreSQL"],
-		image: "/images/aliencare.png",
-		liveUrl: "https://example.com",
-		githubUrl: "https://github.com/joohhhnnnny/project3",
-	},
-	{
-		title: "Senior High School Management System",
-		description:
-			"A web-based application designed to streamline the management of senior high school operations, including student records, class schedules, and grading.",
-		tags: ["Vanilla JS", "PHP", "MySQL"],
-		image: "/images/iscp.png",
-		liveUrl: "https://example.com",
-		githubUrl: "https://github.com/joohhhnnnny/project3",
-	}
-];
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { projects } from "@/data/projects";
 
 const Projects = () => {
 	const n = projects.length;
@@ -58,6 +13,17 @@ const Projects = () => {
 	const [isMobile, setIsMobile] = useState(false);
 	const touchStartX = useRef(0);
 	const touchDeltaX = useRef(0);
+	const router = useRouter();
+	const [navigating, setNavigating] = useState<string | null>(null);
+	const [enteringFromDetail] = useState(() => {
+		try {
+			const flag = sessionStorage.getItem("enterProjects");
+			if (flag) sessionStorage.removeItem("enterProjects");
+			return Boolean(flag);
+		} catch {
+			return false;
+		}
+	});
 
 	// 3 copies for seamless infinite looping
 	const extendedProjects = [...projects, ...projects, ...projects];
@@ -137,8 +103,26 @@ const Projects = () => {
 		touchDeltaX.current = 0;
 	};
 
+	const handleCardClick = useCallback((slug: string, e: React.MouseEvent) => {
+		// Don't navigate if clicking on links
+		const target = e.target as HTMLElement;
+		if (target.closest("a")) return;
+		
+		setNavigating(slug);
+		// Delay navigation for zoom-in animation
+		setTimeout(() => {
+			router.push(`/projects/${slug}`);
+		}, 450);
+	}, [router]);
+
 	return (
-		<section id="projects" className="py-20 relative z-10 overflow-hidden">
+		<motion.section
+			id="projects"
+			initial={{ opacity: enteringFromDetail ? 0 : 1 }}
+			animate={{ opacity: navigating ? 0 : 1 }}
+			transition={{ duration: navigating ? 0.35 : 0.6, ease: [0.22, 1, 0.36, 1] }}
+			className={`py-20 relative z-10 overflow-hidden ${navigating ? "pointer-events-none" : ""}`}
+		>
 			<div className="max-w-6xl mx-auto px-6">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
@@ -155,7 +139,7 @@ const Projects = () => {
 					{!isMobile && (
 						<button
 							onClick={handlePrev}
-							className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 z-20 p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 hover:bg-purple-500 hover:border-purple-500 transition-all duration-200 hover:scale-110 hidden md:flex items-center justify-center"
+							className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 z-20 p-3 bg-white/10 rounded-full border border-white/20 hover:bg-purple-500 hover:border-purple-500 transition-all duration-200 hover:scale-110 hidden md:flex items-center justify-center"
 							aria-label="Previous project"
 						>
 							<ChevronLeft size={24} className="text-white" />
@@ -166,7 +150,7 @@ const Projects = () => {
 					{!isMobile && (
 						<button
 							onClick={handleNext}
-							className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 z-20 p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 hover:bg-purple-500 hover:border-purple-500 transition-all duration-200 hover:scale-110 hidden md:flex items-center justify-center"
+							className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 z-20 p-3 bg-white/10 rounded-full border border-white/20 hover:bg-purple-500 hover:border-purple-500 transition-all duration-200 hover:scale-110 hidden md:flex items-center justify-center"
 							aria-label="Next project"
 						>
 							<ChevronRight size={24} className="text-white" />
@@ -191,17 +175,23 @@ const Projects = () => {
 									key={idx}
 									className="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
 								>
-								<div className="relative h-full flex flex-col border border-white/[0.1] rounded-xl overflow-hidden bg-gradient-to-b from-white/[0.05] to-transparent backdrop-blur-sm group hover:border-purple-500/50 hover:shadow-[0_20px_50px_-15px_rgba(168,85,247,0.35)] hover:-translate-y-4 transform-gpu transition-all duration-300 ease-out will-change-transform">
+								<div
+									onClick={(e) => handleCardClick(project.slug, e)}
+									className="relative h-full flex flex-col border border-white/[0.1] rounded-xl overflow-hidden bg-gradient-to-b from-white/[0.05] to-transparent group hover:border-purple-500/50 hover:shadow-[0_20px_50px_-15px_rgba(168,85,247,0.35)] hover:-translate-y-4 transform-gpu transition-all duration-300 ease-out will-change-transform cursor-pointer"
+								>
 								{/* Gradient overlay on hover */}
 							<div className="absolute inset-0 bg-gradient-to-t from-purple-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" />
 
 							{/* Project Image */}
 							<div className="h-48 bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center overflow-hidden relative rounded-t-xl">
-									<img
-										src={project.image}
-										alt={project.title}
-										className="w-full h-full object-cover transform-gpu transition-transform duration-500 ease-out will-change-transform group-hover:scale-110"
-									/>
+										<Image
+											src={project.image}
+											alt={project.title}
+											fill
+											sizes="(max-width: 640px) 85vw, (max-width: 768px) 70vw, (max-width: 1024px) 50vw, 33vw"
+											draggable={false}
+											className="object-cover transform-gpu transition-transform duration-500 ease-out will-change-transform group-hover:scale-110"
+										/>
 									{/* Image overlay on hover */}
 									<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -211,7 +201,7 @@ const Projects = () => {
 											href={project.liveUrl}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 hover:bg-purple-500 hover:border-purple-500 transition-all duration-200 hover:scale-110"
+												className="p-3 bg-white/10 rounded-full border border-white/20 hover:bg-purple-500 hover:border-purple-500 transition-all duration-200 hover:scale-110"
 										>
 											<ExternalLink size={20} className="text-white" />
 										</a>
@@ -219,7 +209,7 @@ const Projects = () => {
 											href={project.githubUrl}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="p-3 bg-white/10 backdrop-blur-md rounded-full border border-white/20 hover:bg-purple-500 hover:border-purple-500 transition-all duration-200 hover:scale-110"
+												className="p-3 bg-white/10 rounded-full border border-white/20 hover:bg-purple-500 hover:border-purple-500 transition-all duration-200 hover:scale-110"
 										>
 											<Github size={20} className="text-white" />
 										</a>
@@ -298,7 +288,17 @@ const Projects = () => {
 					</div>
 				</div>
 			</div>
-		</section>
+
+			{/* Zoom-in page transition overlay */}
+			{navigating && (
+				<motion.div
+					initial={{ opacity: 0, scale: 0.85 }}
+					animate={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+					className="fixed inset-0 z-[9999] bg-black pointer-events-none"
+				/>
+			)}
+		</motion.section>
 	);
 };
 
