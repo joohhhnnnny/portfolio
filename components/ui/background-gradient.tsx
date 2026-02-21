@@ -57,7 +57,7 @@ export const BackgroundGradient = ({
             : undefined
         }
         className={cn(
-          "absolute inset-0 z-[1] will-change-transform",
+          "absolute inset-0 z-1 will-change-transform",
           borderRadius,
           "bg-[conic-gradient(from_0deg,#7c3aed,#a855f7,#c084fc,#e879f9,#a855f7,#7c3aed)]"
         )}

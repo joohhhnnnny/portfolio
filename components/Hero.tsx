@@ -26,7 +26,7 @@ const Hero = () => {
           >
             <BackgroundGradient className="rounded-full" containerClassName="mb-0" borderRadius="rounded-full">
               <img
-                src="/images/nawng-nako.jpg"
+                src="/images/nawng-nako.svg"
                 alt=""
                 className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover bg-black"
               />

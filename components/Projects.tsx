@@ -173,11 +173,11 @@ const Projects = () => {
 							{extendedProjects.map((project, idx) => (
 								<div
 									key={idx}
-									className="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+									className="shrink-0 w-[85vw] sm:w-[70vw] md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
 								>
 								<div
 									onClick={(e) => handleCardClick(project.slug, e)}
-									className="relative h-full flex flex-col border border-white/[0.1] rounded-xl overflow-hidden bg-gradient-to-b from-white/[0.05] to-transparent group hover:border-purple-500/50 hover:shadow-[0_20px_50px_-15px_rgba(168,85,247,0.35)] hover:-translate-y-4 transform-gpu transition-all duration-300 ease-out will-change-transform cursor-pointer"
+									className="relative h-full flex flex-col border border-white/10 rounded-xl overflow-hidden bg-linear-to-b from-white/5 to-transparent group hover:border-purple-500/50 hover:shadow-[0_20px_50px_-15px_rgba(168,85,247,0.35)] hover:-translate-y-4 transform-gpu transition-all duration-300 ease-out will-change-transform cursor-pointer"
 								>
 								{/* Gradient overlay on hover */}
 							<div className="absolute inset-0 bg-gradient-to-t from-purple-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" />
@@ -193,7 +193,7 @@ const Projects = () => {
 											className="object-cover transform-gpu transition-transform duration-500 ease-out will-change-transform group-hover:scale-110"
 										/>
 									{/* Image overlay on hover */}
-									<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+									<div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
 									{/* Quick action buttons on image hover */}
 									<div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">

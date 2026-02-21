@@ -25,7 +25,7 @@ export const projects: ProjectDetail[] = [
     description:
       "A real estate web application project featuring property listings, AI buyer guidance, fraud detection, and chatbot integration.",
     tags: ["React", "Vite", "Tailwind CSS", "Firebase"],
-    image: "/images/realitech.png",
+    image: "/images/realitech.svg",
     liveUrl: "https://um-realitech-hackestate-1ed69.web.app/",
     githubUrl: "https://github.com/joohhhnnnny/um-realitech-frontend-realestate",
     overview:
@@ -56,7 +56,7 @@ export const projects: ProjectDetail[] = [
     description:
       "A python computer vision project that aims to detect and highlight human faces in real-time using MobileNetv2 and YOLOv8s models.",
     tags: ["Python", "YOLOv8s", "MobileNetv2"],
-    image: "/images/face.jpg",
+    image: "/images/face.svg",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/joohhhnnnny/project2",
     overview:
@@ -87,7 +87,7 @@ export const projects: ProjectDetail[] = [
     description:
       "A Flutter-based 2D physics game that lets players control a bird character as it navigates obstacles using real-world physics principles.",
     tags: ["Physics Game", "Dart", "Flutter"],
-    image: "/images/fluppybert.png",
+    image: "/images/fluppybert.svg",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/joohhhnnnny/project3",
     overview:
@@ -118,7 +118,7 @@ export const projects: ProjectDetail[] = [
     description:
       "A Fullstack web application for managing an auto repair shop, featuring customer management, appointment scheduling, inventory tracking, and invoicing.",
     tags: ["Typescript", "Laravel", "PostgreSQL"],
-    image: "/images/aliencare.png",
+    image: "/images/aliencare.svg",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/joohhhnnnny/project3",
     overview:
@@ -149,7 +149,7 @@ export const projects: ProjectDetail[] = [
     description:
       "A web-based application designed to streamline the management of senior high school operations, including student records, class schedules, and grading.",
     tags: ["Vanilla JS", "PHP", "MySQL"],
-    image: "/images/iscp.png",
+    image: "/images/iscp.svg",
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/joohhhnnnny/project3",
     overview:
